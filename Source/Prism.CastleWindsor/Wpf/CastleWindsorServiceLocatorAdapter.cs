@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Castle.Windsor;
 using CommonServiceLocator;
+using Prism.CastleWindsor.Extensions;
 
 namespace Prism.CastleWindsor
 {
@@ -40,7 +41,7 @@ namespace Prism.CastleWindsor
         /// <inheritdoc />
         protected override object DoGetInstance(Type serviceType, string key)
         {
-            return key != null ? _container.Resolve(key, serviceType) : _container.Resolve(serviceType);
+            return key != null ? _container.Resolve(key, serviceType) : _container.ResolveType(serviceType);
         }
 
         /// <summary>
