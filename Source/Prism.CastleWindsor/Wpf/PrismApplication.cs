@@ -6,9 +6,11 @@ using Castle.Windsor;
 using CommonServiceLocator;
 using Prism.CastleWindsor.Extensions;
 using Prism.CastleWindsor.Ioc;
+using Prism.CastleWindsor.Wpf.DialogService;
 using Prism.Ioc;
 using Prism.Mvvm;
 using Prism.Regions;
+using Prism.Services.Dialogs;
 
 namespace Prism.CastleWindsor
 {
@@ -25,9 +27,8 @@ namespace Prism.CastleWindsor
         protected override void RegisterRequiredTypes(IContainerRegistry containerRegistry)
         {
             base.RegisterRequiredTypes(containerRegistry);
-            this.Container.GetContainer().Register((IRegistration)Component.For<IWindsorContainer>().Instance(Container.GetContainer()));
-            containerRegistry.RegisterSingleton<IRegionNavigationContentLoader, RegionNavigationContentLoader>();
-            containerRegistry.RegisterSingleton<IServiceLocator, CastleWindsorServiceLocatorAdapter>();
+            containerRegistry.GetContainer().Register(Component.For<IDialogService>()
+                .ImplementedBy(typeof(WindsorDialogService)).LifestyleSingleton().IsDefault());
         }
 
         /// <inheritdoc />
@@ -39,11 +40,6 @@ namespace Prism.CastleWindsor
             ExceptionExtensions.RegisterFrameworkExceptionType(typeof(ComponentNotFoundException));
             ExceptionExtensions.RegisterFrameworkExceptionType(typeof(ComponentRegistrationException));
             ExceptionExtensions.RegisterFrameworkExceptionType(typeof(CircularDependencyException));
-        }
-
-        protected override void ConfigureViewModelLocator()
-        {
-            ViewModelLocationProvider.SetDefaultViewModelFactory((view, type) => Container.GetContainer().ResolveType(type));
         }
     }
 }

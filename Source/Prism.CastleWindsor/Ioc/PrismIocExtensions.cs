@@ -1,4 +1,6 @@
-﻿using Castle.Windsor;
+﻿using System;
+using Castle.Windsor;
+using Prism.CastleWindsor.Wpf.DialogService;
 using Prism.Ioc;
 
 namespace Prism.CastleWindsor.Ioc
@@ -14,5 +16,16 @@ namespace Prism.CastleWindsor.Ioc
         {
             return ((IContainerExtension<IWindsorContainer>) containerRegistry).Instance;
         }
+
+        /// <summary>
+            /// Registers an object for navigation in Castle Windsor
+            /// </summary>
+            /// <param name="containerRegistry"></param>
+            /// <param name="type">The type of object to register</param>
+            /// <param name="name">The unique name to register with the object.</param>
+            public static void RegisterForNavigation(this IContainerRegistry containerRegistry, Type type, string name)
+            {
+                containerRegistry.Register(typeof(INavigation), type, name);
+            }
     }
 }
