@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using System.Windows.Controls;
 using Prism.Common;
 using Prism.Ioc;
 using Prism.Mvvm;
@@ -24,7 +25,7 @@ namespace Prism.CastleWindsor.Wpf.DialogService
         /// <param name="parameters">The parameters to pass to the dialog.</param>
         protected override void ConfigureDialogWindowContent(string dialogName, IDialogWindow window, IDialogParameters parameters)
         {
-            var content = _containerExtension.Resolve(typeof(INavigation), dialogName);
+            var content = _containerExtension.Resolve(typeof(UserControl), dialogName);
             if (!(content is FrameworkElement dialogContent))
                 throw new NullReferenceException("A dialog's content must be a FrameworkElement");
 

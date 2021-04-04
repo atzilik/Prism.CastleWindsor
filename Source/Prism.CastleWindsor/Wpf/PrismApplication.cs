@@ -1,15 +1,9 @@
 ﻿using System;
-using System.Reflection;
 using Castle.MicroKernel;
 using Castle.MicroKernel.Registration;
-using Castle.Windsor;
-using CommonServiceLocator;
-using Prism.CastleWindsor.Extensions;
 using Prism.CastleWindsor.Ioc;
 using Prism.CastleWindsor.Wpf.DialogService;
 using Prism.Ioc;
-using Prism.Mvvm;
-using Prism.Regions;
 using Prism.Services.Dialogs;
 
 namespace Prism.CastleWindsor
